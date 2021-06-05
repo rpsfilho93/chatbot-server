@@ -1,5 +1,6 @@
 import psycopg2
 import json
+import os
 
 
 def stringfyList(array):
@@ -12,8 +13,14 @@ def stringfyList(array):
     return output
 
 
-con = psycopg2.connect(host='localhost', database='chatbot',
-                       user='postgres', password='docker')
+pg_host = os.environ['PG_HOST']
+pg_database = os.environ['PG_DATABASE']
+pg_user = os.environ['PG_USER']
+pg_port = os.environ['PG_PORT']
+pg_password = os.environ['PG_PASSWORD']
+
+con = psycopg2.connect(host=pg_host, database=pg_database,
+                       user=pg_user, password=pg_password)
 
 cur = con.cursor()
 
