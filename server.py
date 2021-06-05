@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask.globals import request
 from flask_cors import CORS
@@ -174,14 +175,20 @@ stop_words = ['a', 'o', 'as', 'os', 'qual',
 app = Flask(__name__)
 CORS(app)
 
+pg_host = os.environ['PG_HOST']
+pg_database = os.environ['PG_DATABASE']
+pg_user = os.environ['PG_USER']
+pg_port = os.environ['PG_PORT']
+pg_password = os.environ['PG_PASSWORD']
+
 
 @app.route('/', methods=['GET'])
 def get_answer():
     question = request.args.get('question')
     topic = request.args.get('topic')
 
-    con = psycopg2.connect(host='localhost', database='chatbot',
-                           user='postgres', password='docker')
+    con = psycopg2.connect(host=pg_host, database=pg_database,
+                           user=pg_user, password=pg_password)
     cur = con.cursor()
 
     if(question is None):
