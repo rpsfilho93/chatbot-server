@@ -25,7 +25,7 @@ con = psycopg2.connect(host=pg_host, database=pg_database,
 cur = con.cursor()
 
 # Add uuid
-sql = "create extension if not exists 'uuid-ossp'"
+sql = 'create extension if not exists "uuid-ossp"'
 cur.execute(sql)
 
 sql = 'drop table if exists tree'
