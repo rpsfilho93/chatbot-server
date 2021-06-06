@@ -194,19 +194,23 @@ def get_answer():
     if(question is None):
         return json.dumps({'message': 'Question is missing'}), 400
 
-    if(topic == 'estágio'):
+    if(topic == 'Estágio'):
         doc_name, most_similar_doc = mostSimilarDocument_WR(
             cur, question, (189, 220), a, stop_words)
 
-        answer = json.dumps({"answer": most_similar_doc})
+        answer = json.dumps({
+            "header": 'Segundo o Regulamento de Estágio',
+            "answer": most_similar_doc})
 
         return answer
 
-    if(topic == 'projeto_final'):
+    if(topic == 'Projeto Final de Curso'):
         doc_name, most_similar_doc = mostSimilarDocument_WR(
             cur, question, (149, 188), a, stop_words)
 
-        answer = json.dumps({"answer": most_similar_doc})
+        answer = json.dumps({
+            "header": 'Segundo o Regulamento de Projeto Final de Curso:',
+            "answer": most_similar_doc})
 
         return answer
 
