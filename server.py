@@ -225,8 +225,8 @@ def get_answer():
 
 @app.route('/topics', methods=['GET'])
 def get_topics():
-    con = psycopg2.connect(host='localhost', database='chatbot',
-                           user='postgres', password='docker')
+    con = psycopg2.connect(host=pg_host, database=pg_database,
+                           user=pg_user, password=pg_password)
     cur = con.cursor()
 
     sql = "select * from tree where parent_id is null"
@@ -248,8 +248,8 @@ def get_branches():
     if(topic_id is None):
         return json.dumps({'message': 'Topic id is missing'}), 400
 
-    con = psycopg2.connect(host='localhost', database='chatbot',
-                           user='postgres', password='docker')
+    con = psycopg2.connect(
+        host=pg_host, database=pg_database, user=pg_user, password=pg_password)
     cur = con.cursor()
 
     sql = "select * from tree where parent_id = '%s'" % topic_id
